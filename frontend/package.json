@@ -1,0 +1,33 @@
+{
+  "name": "setquerry-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^8.17.10",
+    "@types/three": "^0.169.0",
+    "gsap": "^3.15.0",
+    "lucide-react": "^1.48.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.18.4",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.6.1",
+    "eslint": "^9.1.0",
+    "tailwindcss": "^3.4.19",
+    "typescript": "~5.6.3",
+    "vite": "^5.4.10"
+  }
+}

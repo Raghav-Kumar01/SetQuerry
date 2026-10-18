@@ -1,0 +1,300 @@
+/* ================================================================
+   MapWorkspace — /map
+   ================================================================ */
+
+.map-page-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #01030a; /* Deep map background */
+  display: flex;
+  flex-direction: column;
+  animation: pageFadeIn 0.35s ease both;
+}
+
+.map-workspace {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px; /* offset navbar */
+  height: calc(100vh - 64px);
+}
+
+/* ── Top Controls ── */
+.map-top-bar {
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  right: 24px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none; /* Let clicks pass through empty space */
+}
+
+.map-top-bar > * {
+  pointer-events: auto;
+}
+
+.btn-map-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(2, 6, 23, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-map-nav:hover {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: rgba(6, 182, 212, 0.4);
+  color: var(--accent-cyan);
+}
+
+.map-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(2, 6, 23, 0.85);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.map-tools {
+  display: flex;
+  align-items: center;
+  background: rgba(2, 6, 23, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 4px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-map-tool {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-map-tool:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+.map-tool-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 4px;
+}
+
+/* ── Interactive Canvas ── */
+.map-canvas-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+/* Simulated Tech Grid Background */
+.map-grid-bg {
+  position: absolute;
+  inset: -100vw -100vh;
+  background-image: 
+    linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+  pointer-events: none;
+}
+
+.map-transform-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* ── Footprint & Overlays ── */
+.map-footprint {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  /* aspectRatio preserved by img */
+}
+
+.footprint-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.85;
+  filter: sepia(0.2) hue-rotate(180deg) contrast(1.1); /* Map-like coloring */
+  border-radius: 4px;
+}
+
+.footprint-boundary {
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.pulse-border {
+  animation: borderPulse 3s infinite ease-in-out;
+}
+
+.footprint-label {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  white-space: nowrap;
+}
+
+.map-node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+.node-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.node-dot.text-cyan {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+/* ── Bottom HUD ── */
+.map-bottom-hud {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.map-coords {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.75rem;
+}
+
+.coord-label {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+}
+
+.coord-val {
+  color: var(--text-main);
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.ml-3 { margin-left: 12px; }
+
+.map-scale-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.scale-line {
+  width: 100px;
+  height: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: none;
+}
+
+/* Animations */
+@keyframes borderPulse {
+  0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-top-bar {
+    flex-wrap: wrap;
+    gap: 12px;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+  }
+  
+  .map-title {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .map-bottom-hud {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+}
+
+@media (max-width: 390px) {
+  .map-title { font-size: 0.7rem; padding: 8px 12px; }
+  .btn-map-nav { padding: 8px 12px; font-size: 0.75rem; }
+  .map-coords { padding: 6px 10px; font-size: 0.65rem; }
+  .coord-val { font-size: 0.7rem; }
+}

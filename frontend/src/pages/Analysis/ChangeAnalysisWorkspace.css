@@ -1,0 +1,365 @@
+/* ================================================================
+   ChangeAnalysisWorkspace — /analyze/change workspace
+   ================================================================ */
+
+.ca-workspace {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-dark);
+  padding-top: 64px; /* below fixed navbar */
+  animation: pageFadeIn 0.35s ease both;
+}
+
+.ca-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 20px;
+  background: var(--bg-dark);
+  color: var(--text-muted);
+  padding-top: 64px;
+}
+
+/* ── Status Bar ──────────────────────────────── */
+.ca-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 24px;
+  background: rgba(2, 6, 23, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.ca-status-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ca-status-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.ca-status-value {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-main);
+}
+
+.ca-status-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ca-status-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-action-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-action-sm:hover, .btn-back:hover {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.3);
+  color: var(--text-main);
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ── Split Layout ────────────────────────────── */
+.ca-split {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.ca-comparison-panel {
+  flex: 7;
+  min-width: 0;
+  display: flex;
+  position: relative;
+  padding: 16px;
+}
+
+.ca-result-panel {
+  flex: 3;
+  min-width: 280px;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background: rgba(15, 23, 42, 0.5) !important;
+  border-left: 1px solid rgba(6, 182, 212, 0.1);
+  border-radius: 0 !important;
+  overflow-y: auto;
+}
+
+.ca-panel-title {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  padding: 20px 20px 8px;
+}
+
+.ca-analysis-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px 16px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ca-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
+}
+
+/* ── Sections ────────────────────────────────── */
+.ca-section {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.ca-section-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.ca-section-body {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-main);
+  font-weight: 300;
+}
+
+.ca-insight {
+  color: rgba(6, 182, 212, 0.85);
+  font-style: italic;
+}
+
+/* Change Classification */
+.ca-class-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ca-class-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  font-weight: 300;
+}
+
+.ca-severity-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ca-class-name {
+  flex: 1;
+}
+
+.ca-class-area {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* Affected Area Grid */
+.ca-area-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.ca-area-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ca-area-number {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.ca-area-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* Confidence */
+.ca-confidence {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ca-conf-number {
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+.ca-conf-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ── Change Mask Overlay ─────────────────────── */
+.ca-mask-preview {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  width: 200px;
+  height: 150px;
+  background: rgba(2, 6, 23, 0.85);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.ca-mask-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(15, 23, 42, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.ca-mask-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  font-size: 0.7rem;
+  color: rgba(6, 182, 212, 0.6);
+  font-style: italic;
+  background: radial-gradient(circle at center, rgba(6, 182, 212, 0.1), transparent);
+}
+
+/* ── Demo notice ─────────────────────────────── */
+.ca-demo-notice {
+  padding: 10px 20px;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(148, 163, 184, 0.4);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  margin-top: auto;
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 1024px) {
+  .ca-split {
+    flex-direction: column;
+  }
+
+  .ca-comparison-panel {
+    height: 50vh;
+    flex: none;
+    padding: 0;
+  }
+
+  .ca-result-panel {
+    max-width: none;
+    border-left: none;
+    border-top: 1px solid rgba(6, 182, 212, 0.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .ca-status-bar {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .ca-status-actions {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .ca-comparison-panel {
+    height: 40vh;
+  }
+  
+  .ca-mask-preview {
+    bottom: 16px;
+    left: 16px;
+    width: 150px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 390px) {
+  .ca-status-bar { padding: 8px 12px; gap: 8px; }
+  .ca-status-label { font-size: 0.55rem; }
+  .ca-status-value { font-size: 0.75rem; }
+  .btn-action-sm { padding: 7px 10px; font-size: 0.75rem; }
+  .ca-comparison-panel { height: 35vh; }
+  .ca-panel-title { font-size: 0.9rem; padding: 14px 14px 6px; }
+  .ca-section { padding: 12px 14px; }
+  .ca-mask-preview { display: none; }
+}

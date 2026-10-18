@@ -1,0 +1,25 @@
+.earth-map-container {
+  flex: 1;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.placeholder-content {
+  text-align: center;
+  opacity: 0.7;
+}
+
+.placeholder-content h3 {
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.placeholder-content p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}

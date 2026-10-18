@@ -1,0 +1,18 @@
+{
+  "dataset": "LEVIR-CD",
+  "model": "Model 2",
+  "final_manifest": "data_pipeline/manifests/model2/model2_final_manifest.csv",
+  "total_pairs": 637,
+  "train_pairs": 445,
+  "val_pairs": 64,
+  "test_pairs": 128,
+  "expected_train": 445,
+  "expected_val": 64,
+  "expected_test": 128,
+  "expected_total": 637,
+  "official_split_preserved": true,
+  "duplicate_pair_ids": 0,
+  "pairing_validation": true,
+  "validation_status": "PASS",
+  "paths_are_relative": true
+}

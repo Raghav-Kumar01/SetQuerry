@@ -1,0 +1,40 @@
+.home-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.explore-section {
+  display: flex;
+  flex-direction: column;
+  padding: 64px 48px;
+  gap: 48px;
+  /* Subtle top gradient creates visual continuity from the dark final video frame */
+  padding-top: 120px;
+  background: linear-gradient(
+    to bottom,
+    var(--bg-dark) 0%,
+    rgba(2, 6, 23, 0.95) 100%
+  );
+}
+
+.explore-header {
+  text-align: center;
+}
+
+.explore-content {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Common utility classes */
+.font-bold {
+  font-weight: 700;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+

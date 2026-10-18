@@ -1,0 +1,118 @@
+.cs-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #010410;
+  cursor: ew-resize;
+  user-select: none;
+  touch-action: none;
+  border: 1px solid rgba(6, 182, 212, 0.15);
+}
+
+.cs-container:focus {
+  outline: 2px solid rgba(6, 182, 212, 0.4);
+  outline-offset: 2px;
+}
+
+/* ── Image layers ────────────────────────────── */
+.cs-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.cs-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.cs-before {
+  z-index: 2;
+}
+
+.cs-after {
+  z-index: 1;
+}
+
+/* ── Labels ──────────────────────────────────── */
+.cs-label {
+  position: absolute;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 12px;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--text-main);
+  background: rgba(2, 6, 23, 0.8);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.cs-label--before {
+  left: 16px;
+}
+
+.cs-label--after {
+  right: 16px;
+}
+
+.cs-date {
+  font-size: 0.6rem;
+  color: var(--accent-cyan);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* ── Handle ──────────────────────────────────── */
+.cs-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.cs-handle-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 6px rgba(6, 182, 212, 0.5);
+}
+
+.cs-handle-grip {
+  position: relative;
+  z-index: 11;
+  width: 28px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 6, 23, 0.9);
+  border: 1px solid var(--accent-cyan);
+  border-radius: 4px;
+  color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+  pointer-events: auto;
+  cursor: ew-resize;
+}
+
+.cs-container.dragging .cs-handle-grip {
+  background: rgba(6, 182, 212, 0.15);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.5);
+}

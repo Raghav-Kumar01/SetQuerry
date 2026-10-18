@@ -1,0 +1,1 @@
+"""SetQuerry FastAPI application."""

@@ -1,0 +1,10 @@
+torch
+torchvision
+numpy
+pandas
+scikit-learn
+pillow
+matplotlib
+tqdm
+pyyaml
+opencv-python-headless==4.14.0.94

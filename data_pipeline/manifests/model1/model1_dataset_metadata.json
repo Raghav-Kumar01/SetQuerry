@@ -1,0 +1,24 @@
+{
+  "dataset": "RSVQA-HR",
+  "model": "Model 1",
+  "final_manifest": "data_pipeline/manifests/model1/model1_final_manifest.csv",
+  "total_samples": 950867,
+  "train_samples": 625340,
+  "val_samples": 102843,
+  "test_samples": 222684,
+  "split_created": false,
+  "seed": null,
+  "required_columns": [
+    "sample_id",
+    "image_path",
+    "question",
+    "answer",
+    "split"
+  ],
+  "missing_required_fields": 0,
+  "duplicate_sample_ids": 0,
+  "invalid_paths": 0,
+  "invalid_splits": 0,
+  "validation_status": "PASS",
+  "paths_are_relative": true
+}

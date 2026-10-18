@@ -1,0 +1,44 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  z-index: 100;
+  /* Transparent overlay — no opaque panel over the video */
+  background: linear-gradient(
+    to bottom,
+    rgba(2, 6, 23, 0.7) 0%,
+    rgba(2, 6, 23, 0) 100%
+  );
+  border-bottom: 1px solid rgba(6, 182, 212, 0.08);
+  border-radius: 0;
+  /* No backdrop-filter — let the video show through cleanly */
+}
+
+.navbar-logo {
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 32px;
+}
+
+.navbar-links a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: var(--accent-cyan);
+}

@@ -1,0 +1,370 @@
+/* ================================================================
+   OpticalSarAnalysis — /analyze/optical-sar workspace
+   ================================================================ */
+
+.osa-workspace {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-dark);
+  padding-top: 64px; /* below fixed navbar */
+  animation: pageFadeIn 0.35s ease both;
+}
+
+.osa-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 20px;
+  background: var(--bg-dark);
+  color: var(--text-muted);
+  padding-top: 64px;
+}
+
+/* ── Status Bar ──────────────────────────────── */
+.osa-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 24px;
+  background: rgba(2, 6, 23, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.osa-status-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.osa-status-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.osa-status-value {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-main);
+}
+
+.osa-status-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.osa-status-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-action-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-action-sm:hover, .btn-back:hover {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.3);
+  color: var(--text-main);
+}
+
+/* ── Symmetric Visual Layout ─────────────────── */
+.osa-visual-container {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 24px;
+  height: 55vh;
+  min-height: 400px;
+}
+
+.osa-image-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(2, 6, 23, 0.5);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.osa-panel-header {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 16px;
+  background: rgba(2, 6, 23, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.osa-panel-title-text {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.osa-metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.osa-image-wrapper {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.osa-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.osa-image--sar {
+  filter: grayscale(100%) contrast(120%) brightness(90%);
+}
+
+/* Center Indicator */
+.osa-center-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  margin: 0 -20px;
+  z-index: 20;
+}
+
+.osa-indicator-line {
+  flex: 1;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(6, 182, 212, 0.3), transparent);
+}
+
+.osa-indicator-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(2, 6, 23, 0.95);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+/* ── Result Panel ────────────────────────────── */
+.osa-result-container {
+  padding: 0 24px 24px;
+}
+
+.osa-result-panel {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.osa-result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.osa-result-header h2 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.osa-confidence-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.osa-conf-val {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.osa-conf-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.osa-result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding: 24px;
+}
+
+.osa-result-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.osa-result-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mt-4 { margin-top: 24px; }
+
+.osa-section-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 6px;
+}
+
+.osa-body-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  font-weight: 300;
+}
+
+.osa-insight-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(6, 182, 212, 0.85);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.osa-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.osa-features-list li {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.osa-features-list li::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+}
+
+/* ── Demo notice ─────────────────────────────── */
+.osa-demo-notice {
+  padding: 12px 24px;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(148, 163, 184, 0.4);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 1024px) {
+  .osa-result-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .osa-visual-container {
+    flex-direction: column;
+    height: auto;
+    gap: 24px;
+  }
+
+  .osa-image-panel {
+    height: 40vh;
+    min-height: 300px;
+  }
+
+  .osa-center-indicator {
+    width: 100%;
+    height: 40px;
+    flex-direction: row;
+    margin: -12px 0;
+  }
+
+  .osa-indicator-line {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, transparent, rgba(6, 182, 212, 0.3), transparent);
+  }
+
+  .osa-indicator-icon {
+    margin: 0 10px;
+  }
+  
+  .osa-status-bar {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .osa-status-actions {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 390px) {
+  .osa-status-bar { padding: 8px 12px; gap: 8px; }
+  .osa-status-label { font-size: 0.55rem; }
+  .osa-status-value { font-size: 0.75rem; }
+  .btn-action-sm { padding: 7px 10px; font-size: 0.75rem; }
+  .osa-visual-container { padding: 12px; }
+  .osa-image-panel { min-height: 250px; }
+  .osa-result-header h2 { font-size: 0.95rem; }
+  .osa-conf-val { font-size: 1.25rem; }
+}

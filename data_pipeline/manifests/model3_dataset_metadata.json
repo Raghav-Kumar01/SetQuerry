@@ -1,0 +1,48 @@
+{
+  "dataset": "SEN1-2",
+  "model": "Model 3",
+  "manifest_file": "model3_final_manifest.csv",
+  "total_pairs": 75724,
+  "total_scenes": 70,
+  "season": "spring",
+  "seed": 42,
+  "columns": [
+    "pair_id",
+    "optical_path",
+    "sar_path",
+    "split",
+    "season",
+    "scene_id"
+  ],
+  "split": {
+    "train": {
+      "scenes": 49,
+      "pairs": 52814,
+      "percentage": 69.7454
+    },
+    "val": {
+      "scenes": 10,
+      "pairs": 10236,
+      "percentage": 13.5175
+    },
+    "test": {
+      "scenes": 11,
+      "pairs": 12674,
+      "percentage": 16.7371
+    }
+  },
+  "path_structure": {
+    "optical_root": "ROIs1158_spring/s2_0/",
+    "sar_root": "ROIs1158_spring/s1_0/",
+    "paths_are_relative": true
+  },
+  "validation": {
+    "missing_fields": 0,
+    "duplicate_pair_id": 0,
+    "scene_overlap_train_val": 0,
+    "scene_overlap_train_test": 0,
+    "scene_overlap_val_test": 0,
+    "pairing_validation": true
+  },
+  "manifest_sha256": "cd81140c20788a16b13912404092247999c83c4a75b4129c96e1709c84256178"
+}
